@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王佳鑫的小站</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <div class="profile">
+            <img src="files/pictures/photo_head.jpg" alt="王佳鑫头像" class="profile-pic">
+            <span class="profile-name">王佳鑫</span>
+        </div>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="contact.html">联系</a></li>
+            <li><a href="projects.html" class="active">项目</a></li>
+            <li><button id="theme-toggle" type="button" aria-label="切换主题">切换至暗色</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>项目</h1>
+        </header>
+        
+        <div class="card">
+            <h2>简述</h2>
+            <p>我叫王佳鑫，目前是江苏省南通中学的一名中学生。</p>
+            <p>我热爱信息学以及文学。我喜欢在闲时泡上一杯热茶，亦或一杯咖啡，看看书，写写代码。</p>
+            <p>荣幸的是，我遇到了许多优秀的老师、同学以及朋友，他们丰富我的人生经历，帮助我不断进步。</p>
+        </div>
+        
+        <div class="card">
+            <h2>技能与专长</h2>
+            <p>我熟练掌握Python与HTML，自己学习了CSS、JavaScript等编程语言，能够进行Web开发、数据分析等。</p>
+            <p>我曾获得全国青少年信息科技教育成果展示大赛省一等奖、NOC大赛省二等奖、南通市青少年创意编程大赛一等奖等荣誉。</p>
+            <p>未来的道路上，我会继续学习，不断进步，永远相信美好的事情即将发生。</p>
+        </div>
+        
+        <div class="card">
+            <h2>写给自己，也写给你</h2>
+            <p>小米公司的价值观打动了我，“永远相信美好的事情即将发生”。我将始终相信，美好的事情即将发生。</p>
+            <p>同时，苏轼先生的诗词也教会了我许多人生道理，“回首向来萧瑟处，归去，也无风雨也无晴”。</p>
+        </div>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function updateToggleText(theme) {
+            themeToggle.textContent = theme === 'dark' ? '切换至浅色' : '切换至暗色';
+        }
+
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateToggleText(theme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            
+            themeToggle.classList.add('theme-toggle-animation');
+            setTimeout(() => {
+                themeToggle.classList.remove('theme-toggle-animation');
+            }, 300);
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDarkScheme.matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    </script>
+</body>
+</html>
